@@ -1,0 +1,6 @@
+vars:
+  SEDMAX_URL: https://demo.sedmax.ru
+  SEDMAX_USERNAME: demo
+  SEDMAX_PASSWORD: demo
+  dev-101: dev-101_ea_imp
+  dev-102: dev-102_ea_imp
