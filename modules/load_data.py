@@ -12,10 +12,12 @@ from tensorflow.keras import layers, Model
 from sdk import Sedmax, ElectricalArchive
 
 config_path = "./config/config.yaml"
-SEDMAX_config = yaml.safe_load(open(config_path))['vars']
+config = yaml.safe_load(open(config_path))
+SEDMAX_config = config['vars']
+days_to_load = config['resources']['days_to_load']
 
 
-def get_data(days=90, mode='onestep'):
+def get_data(days=days_to_load, mode='onestep'):
 
     if mode not in ['onestep', 'multistep']:
         raise Exception('Wrong mode specified')
@@ -50,6 +52,9 @@ def get_data(days=90, mode='onestep'):
     else:
         for i in range(1, 336, 2):
             df[f'value_{i}'] = df['value'].shift(i).diff()
+
+        for i in range(1, 49):
+            df[f'target_{i}'] = df['value'].shift(-i)
 
     df = pd.get_dummies(df)
 
