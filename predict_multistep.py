@@ -14,13 +14,13 @@ def main(config):
 
     df = pd.read_csv(data_config['path'])
     model = tf.keras.models.load_model(model_config['path'])
-    df_pred = df[df.value.isna()][:1]
+    df_pred = df[-50:]
+    df_pred = df_pred[df_pred.value.isna()][:1]
     df = df.dropna(subset='value')
 
     feature_cols = [x for x in df.columns if 'target_' not in x]
 
     def predict(df, model):
-
         X = df[feature_cols].drop(['dt', 'value'], axis=1).to_numpy()
         preds = model.predict(X).squeeze()
         return preds

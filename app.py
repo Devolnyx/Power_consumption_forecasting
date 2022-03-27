@@ -60,7 +60,7 @@ def plot(data, predictions, num_records, title):
 header = html.Div(
         html.Div(dbc.Button("Обновить", id="update", n_clicks=0, className="ant-electro-btn-primary",
             style={'margin': '3px', 'margin-right': '1%', 'font-size': '14px'}), style={'float': 'right'}),
-        style={'margin-top': '5px', 'margin-bottom': '5px', 'width': '100%',
+        style={'margin-top': '5px', 'margin-bottom': '5px', 'width': '100%', 'padding-right': '2%',
                     'backgroundColor': "grey", 'box-shadow': '2px 2px 2px rgba(0,0,0,0.3)'})
 
 graphs_content = dbc.Container(
@@ -112,7 +112,7 @@ def update_data(n, n_clicks):
 def update_data(data):
     multistep_df = pd.read_json(data[0]).dropna(subset='value')
     multistep_pred = pd.read_json(data[1])
-    onestep_df = pd.read_json(data[2])
+    onestep_df = pd.read_json(data[2]).dropna(subset='value')
     onestep_pred = pd.read_json(data[3])
 
     fig1 = plot(multistep_df, multistep_pred, 48, 'Прогноз потребление электроэнергии (24 часа)')

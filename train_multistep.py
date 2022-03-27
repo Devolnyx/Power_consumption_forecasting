@@ -28,7 +28,7 @@ def main(config):
 
     def train(df, model):
         df = df.dropna()[-48 * 28:]
-        X = df['feature_cols'].drop(['dt', 'value'], axis=1).to_numpy()
+        X = df[feature_cols].drop(['dt', 'value'], axis=1).to_numpy()
         y = df[target_cols].to_numpy()
         model = retrain(X, y, model)
         return model

@@ -14,7 +14,8 @@ def main(config):
 
     df = pd.read_csv(data_config['path'])
     model = tf.keras.models.load_model(model_config['path'])
-    data_pred = df[df.value.isna()][:1]
+    data_pred = df[-50:]
+    data_pred = data_pred[data_pred.value.isna()][:1]
     df = df.dropna()
 
     def predict(df, model):

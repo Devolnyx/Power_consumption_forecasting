@@ -10,13 +10,13 @@ models:
     mae_threshold: 0.25
     epochs: 300
     early_stop: 25
-    test_size: 0.33
+    test_size: 0.25
   multistep:
     path: ./models/multistep_model.h5
     mae_threshold: 0.75
     epochs: 300
     early_stop: 25
-    test_size: 0.33
+    test_size: 0.25
 resources:
   days_to_load: 90
   onestep:
