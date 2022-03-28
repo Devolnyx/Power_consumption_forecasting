@@ -26,7 +26,7 @@ colors = {
 }
 
 # Create a dash application
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.COSMO])
 
 
 def plot(data, predictions, num_records, title):
