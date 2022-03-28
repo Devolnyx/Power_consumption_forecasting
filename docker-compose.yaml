@@ -1,4 +1,4 @@
-version: '2.4'
+version: '3.4'
 x-airflow-common:
   &airflow-common
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
@@ -21,7 +21,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ./resources:/resources
+    - ./resources:/opt/airflow/resources
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -226,3 +226,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  resources:
