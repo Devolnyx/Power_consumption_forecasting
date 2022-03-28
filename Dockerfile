@@ -1,18 +1,17 @@
-FROM python:3.8
-
-RUN mkdir -p /app/
+FROM apache/airflow:2.2.4-python3.8
+USER root
 
 COPY . .
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+         build-essential libopenmpi-dev \
+  && apt-get autoremove -yqq --purge \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+USER airflow
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apt-get update && \
-    apt-get install -y locales && \
-    sed -i -e 's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen && \
-    dpkg-reconfigure --frontend=noninteractive locales
-
-ENV LANG ru_RU.UTF-8
-ENV LC_ALL ru_RU.UTF-8
-
-EXPOSE 8050
 

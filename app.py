@@ -1,19 +1,21 @@
 import yaml
 import os
 import pandas as pd
-import numpy as np
 import dash
-import datetime
-from dash import dcc, html, dash_table, callback_context
-from dash.dependencies import Input, Output, State
+from dash import dcc, html
+from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 
-import locale
-locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
+#import locale
+#locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
-config_path = "./config/config.yaml"
-config = yaml.safe_load(open(config_path))
+try:
+    project_path = os.path.abspath(os.path.curdir)
+    config_path = "/config/config.yaml"
+    config = yaml.safe_load(open(project_path + config_path))
+except:
+    config = yaml.safe_load(open("/opt/airflow/config/config_airflow.yaml"))
 
 colors = {
     'grid': "#b9b9b9",
@@ -110,9 +112,9 @@ def update_data(n, n_clicks):
               Input(component_id='memory', component_property='data')
               )
 def update_data(data):
-    multistep_df = pd.read_json(data[0]).dropna(subset='value')
+    multistep_df = pd.read_json(data[0]).dropna(subset=['value'])
     multistep_pred = pd.read_json(data[1])
-    onestep_df = pd.read_json(data[2]).dropna(subset='value')
+    onestep_df = pd.read_json(data[2]).dropna(subset=['value'])
     onestep_pred = pd.read_json(data[3])
 
     fig1 = plot(multistep_df, multistep_pred, 48, 'Прогноз потребление электроэнергии (24 часа)')

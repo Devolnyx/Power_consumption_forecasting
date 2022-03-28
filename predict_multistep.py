@@ -1,10 +1,15 @@
 import numpy as np
+import os
 import yaml
 import pandas as pd
 import tensorflow as tf
 
-config_path = "./config/config.yaml"
-config = yaml.safe_load(open(config_path))
+try:
+    project_path = os.path.abspath(os.path.curdir)
+    config_path = "/config/config.yaml"
+    config = yaml.safe_load(open(project_path + config_path))
+except:
+    config = yaml.safe_load(open("/opt/airflow/config/config_airflow.yaml"))
 
 
 def main(config):
@@ -16,7 +21,7 @@ def main(config):
     model = tf.keras.models.load_model(model_config['path'])
     df_pred = df[-50:]
     df_pred = df_pred[df_pred.value.isna()][:1]
-    df = df.dropna(subset='value')
+    df = df.dropna(subset=['value'])
 
     feature_cols = [x for x in df.columns if 'target_' not in x]
 

@@ -1,10 +1,14 @@
-import numpy as np
+import os
 import yaml
 import pandas as pd
 import tensorflow as tf
 
-config_path = "./config/config.yaml"
-config = yaml.safe_load(open(config_path))
+try:
+    project_path = os.path.abspath(os.path.curdir)
+    config_path = "/config/config.yaml"
+    config = yaml.safe_load(open(project_path + config_path))
+except:
+    config = yaml.safe_load(open("/opt/airflow/config/config_airflow.yaml"))
 
 
 def main(config):

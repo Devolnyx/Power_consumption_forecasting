@@ -1,0 +1,34 @@
+vars:
+  SEDMAX_URL: https://demo.sedmax.ru
+  SEDMAX_USERNAME: demo
+  SEDMAX_PASSWORD: demo
+  dev-101: dev-101_ea_imp
+  dev-102: dev-102_ea_imp
+models:
+  onestep:
+    path: /opt/airflow/models/onestep_model.h5
+    mae_threshold: 0.25
+    epochs: 300
+    early_stop: 25
+    test_size: 0.25
+  multistep:
+    path: /opt/airflow/models/multistep_model.h5
+    mae_threshold: 0.75
+    epochs: 300
+    early_stop: 25
+    test_size: 0.25
+resources:
+  days_to_load: 90
+  onestep:
+    path: /opt/airflow/resources/onestep_df.csv
+    pred: /opt/airflow/resources/onestep_pred.csv
+  multistep:
+    path: /opt/airflow/resources/multistep_df.csv
+    pred: /opt/airflow/resources/multistep_pred.csv
+graphs:
+  colors:
+    grid: #b9b9b9
+    graph_font: #000000
+    plot_area: #ffffff
+    plot_background: #fafafa
+    background_color: #ffffff

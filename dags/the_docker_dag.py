@@ -33,12 +33,12 @@ with DAG(
 
         globals()['train_'+task] = BashOperator(
             task_id='train_' + task,
-            bash_command=f'python3 /opt/airflow/app/train_' + task + '.py'
+            bash_command=f'python3 /opt/airflow/train_' + task + '.py' #python3 /opt/airflow/app/train_' + task + '.py'
         )
 
         globals()['predict_'+task] = BashOperator(
             task_id='predict_' + task,
-            bash_command=f'python3 /opt/airflow/app/predict_' + task + '.py'
+            bash_command=f'python3 /opt/airflow/predict_' + task + '.py' #'python3 /opt/airflow/app/predict_' + task + '.py'
         )
 
         globals()['train_' + task] >> globals()['predict_'+task]

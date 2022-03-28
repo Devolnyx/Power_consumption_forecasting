@@ -1,18 +1,25 @@
 import yaml
+import os
 import tensorflow as tf
 from modules.load_data import get_data
 from modules.train import retrain
 
-config_path = "./config/config.yaml"
-config = yaml.safe_load(open(config_path))
+###
+base_path = os.path.dirname(os.path.abspath(__file__))
 
+try:
+    project_path = os.path.abspath(os.path.curdir)
+    config_path = "/config/config.yaml"
+    config = yaml.safe_load(open(project_path + config_path))
+except:
+    config = yaml.safe_load(open("/opt/airflow/config/config_airflow.yaml"))
 
 def main(config):
 
     model_config = config['models']['onestep']
     data_config = config['resources']['onestep']
 
-    df = get_data()
+    df = get_data(config)
     df.to_csv(data_config['path'], index=False)
     model = tf.keras.models.load_model(model_config['path'])
 
