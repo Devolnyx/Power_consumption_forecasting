@@ -1,6 +1,6 @@
 ## Office power consumption forecasting
 
-A scratch of a model and dashboard for monitoring and forecasting office power consumption.
+A scratch of a models and dashboard for monitoring and forecasting office power consumption.
  - Real data from the power meter received via API from the SEDMAX demo server;
  - The pipelines for requesting, loading, transform data, evaluating and training the model are built on Airflow;
  - The Dash module is used to visualize timeseries.
