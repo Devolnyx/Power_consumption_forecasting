@@ -2,12 +2,12 @@ import yaml
 import tensorflow as tf
 
 
-def retrain(X,y,model):
+def retrain(X, y, model, config, mode='onestep'):
 
-    config_path = "./config/config.yaml"
-    config = yaml.safe_load(open(config_path))
+    if mode not in ['onestep', 'multistep']:
+        raise Exception('Wrong mode specified')
 
-    model_config = config['models']['onestep']
+    model_config = config['models'][mode]
     test_size = model_config['test_size']
     epochs = model_config['epochs']
     stop_rounds = model_config['early_stop']

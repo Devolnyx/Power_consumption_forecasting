@@ -65,7 +65,7 @@ services:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 3
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -79,7 +79,7 @@ services:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 2
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -95,7 +95,7 @@ services:
         - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 2
     environment:
       <<: *airflow-common-env
       # Required to handle warm shutdown of the celery workers properly
@@ -114,7 +114,7 @@ services:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 2
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -207,7 +207,7 @@ services:
       test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 2
     restart: always
     depends_on:
       <<: *airflow-common-depends-on

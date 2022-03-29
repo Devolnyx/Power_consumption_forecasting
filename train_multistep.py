@@ -33,17 +33,17 @@ def main(config):
         preds = model.predict(X).squeeze()
         return (abs(preds - y)).mean()
 
-    def train(df, model):
+    def train(df, model, config):
         df = df.dropna()[-48 * 28:]
         X = df[feature_cols].drop(['dt', 'value'], axis=1).to_numpy()
         y = df[target_cols].to_numpy()
-        model = retrain(X, y, model)
+        model = retrain(X, y, model, config, mode="multistep")
         return model
 
     eval_score = evaluate(df, model)
 
     if eval_score > model_config['mae_threshold']:
-        model = train(df, model)
+        model = train(df, model, config)
         new_score = evaluate(df, model)
 
         if new_score < eval_score:
