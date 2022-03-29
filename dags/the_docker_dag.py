@@ -13,10 +13,10 @@ project_path = os.path.abspath(os.path.curdir)
 
 default_args = {
     "owner": "Devolnyx",
-    "start_date": days_ago(0),  # запуск день назад
-    "retries": 1,  # запуск таска до 5 раз, если ошибка
+    "start_date": days_ago(0),
+    "retries": 1,
     "retry_delay": datetime.timedelta(seconds=10),
-    "task_concurency": 2  # одновременно только 1 таск
+    "task_concurency": 2
 }
 
 
