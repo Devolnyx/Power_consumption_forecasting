@@ -117,8 +117,8 @@ def update_data(data):
     onestep_df = pd.read_json(data[2]).dropna(subset=['value'])
     onestep_pred = pd.read_json(data[3])
 
-    fig1 = plot(multistep_df, multistep_pred, 48, 'Прогноз потребление электроэнергии (24 часа)')
-    fig2 = plot(onestep_df, onestep_pred, 12, 'Прогноз потребление электроэнергии (30 минут)')
+    fig1 = plot(multistep_df, multistep_pred, 48, 'Прогноз потребления электроэнергии (24 часа)')
+    fig2 = plot(onestep_df, onestep_pred, 12, 'Прогноз потребления электроэнергии (30 минут)')
     return [fig1, fig2]
 
 if __name__ == "__main__":

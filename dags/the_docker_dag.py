@@ -26,7 +26,8 @@ pipelines = {"onestep": {"schedule": "1,31 * * * *"},  # At minute 1 and 31
 with DAG(
             default_args=default_args,
             dag_id="docker_dag",
-            schedule_interval="1,31 * * * *"
+            schedule_interval="1,31 * * * *",
+            catchup=False
     ) as dag:
 
     for task, params in pipelines.items():
